@@ -16,9 +16,34 @@ spring:
           predicates:
             - Path=/flow-manager/**
 
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: api-gateway
+            client-secret: u2U1GsPutmyK6W6uZFXDxr0NJVHuvTnY
+            authorization-grant-type: authorization_code
+            scope: openid, profile, email
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9090/realms/conversion
+
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/conversion
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}
+
+
+logging:
+  level:
+    org.springframework.security: ${SECURITY_LEVEL:DEBUG}
+    org.springframework.security.oauth2: ${SECURITY_OATH2_LEVEL:DEBUG}
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: ${SECURITY_ADAPTER_LEVEL:DEBUG}
