@@ -5,9 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers.*;
@@ -18,6 +20,9 @@ class SecurityConfigTest {
 
     @Autowired
     private ApplicationContext context;
+
+    @MockBean
+    private ReactiveClientRegistrationRepository clientRegistrationRepository;
 
     private WebTestClient webTestClient;
 
